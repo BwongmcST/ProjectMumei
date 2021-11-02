@@ -8,6 +8,8 @@ public class PlayerViewController : MonoBehaviour
     private float mouseSpeed = 150f;
     [SerializeField]
     private Transform playerBody;
+    [SerializeField]
+    private InventoryController inventoryController;
 
     private float _xRotation = 0f;
 
@@ -25,15 +27,18 @@ public class PlayerViewController : MonoBehaviour
 
     void PlayerViewControl()
     {
-        float MouseX = Input.GetAxis("Mouse X") * mouseSpeed * Time.deltaTime;
-        float MouseY = Input.GetAxis("Mouse Y") * mouseSpeed * Time.deltaTime;
+        if (inventoryController.inventoryIsOpen == false)
+        {
+            float MouseX = Input.GetAxis("Mouse X") * mouseSpeed * Time.deltaTime;
+            float MouseY = Input.GetAxis("Mouse Y") * mouseSpeed * Time.deltaTime;
 
-        _xRotation = _xRotation - MouseY;
-        _xRotation = Mathf.Clamp(_xRotation, -90f, 90f);
+            _xRotation = _xRotation - MouseY;
+            _xRotation = Mathf.Clamp(_xRotation, -90f, 90f);
 
-        transform.localRotation = Quaternion.Euler(_xRotation, 0f, 0f);
+            transform.localRotation = Quaternion.Euler(_xRotation, 0f, 0f);
 
-        playerBody.Rotate(Vector3.up * MouseX);
+            playerBody.Rotate(Vector3.up * MouseX);
+        }
     }
 
 
