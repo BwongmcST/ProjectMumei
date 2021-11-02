@@ -6,28 +6,28 @@ public class PlayerController : MonoBehaviour
 {
 
     [SerializeField]
-    private CharacterController controller;
+    private CharacterController _controller;
 
     [SerializeField]
-    private float playerMoveSpeed = 10f;
+    private float _playerMoveSpeed = 10f;
 
     [SerializeField]
-    private float gravity = -2f;
+    private float _gravity = -2f;
     
     [SerializeField]
-    private Transform groundCheck;
+    private Transform _groundCheck;
 
     [SerializeField]
-    private LayerMask groundMask;
+    private LayerMask _groundMask;
 
     [SerializeField]
-    private float jumpHeight = 3f;
+    private float _jumpHeight = 3f;
 
-    private float groundDistance = 0.4f;
+    private float _groundDistance = 0.4f;
 
-    private bool isGrounded;
+    private bool _isGrounded;
 
-    private Vector3 velocity;
+    private Vector3 _velocity;
 
     // Start is called before the first frame update
     void Start()
@@ -52,34 +52,35 @@ public class PlayerController : MonoBehaviour
 
         Vector3 move = transform.right * x + transform.forward * z;
 
-        controller.Move(move * playerMoveSpeed * Time.deltaTime);
+        _controller.Move(move * _playerMoveSpeed * Time.deltaTime);
 
     }
 
     void playerFall()
     {
-        velocity.y += gravity * Time.deltaTime;
+        _velocity.y += _gravity * Time.deltaTime;
 
-        controller.Move(velocity * Time.deltaTime);
+        _controller.Move(_velocity * Time.deltaTime);
     }
 
     void CheckGrounded()
     {
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
-        Debug.Log(isGrounded);
-        Debug.Log(velocity);
+        _isGrounded = Physics.CheckSphere(_groundCheck.position, _groundDistance, _groundMask);
+        Debug.Log(_isGrounded);
+        Debug.Log(_velocity);
 
-        if(isGrounded && velocity.y < 0)
+        if(_isGrounded && _velocity.y < 0)
         {
-            velocity.y = -1f;
+            _velocity.y = -1f;
         }
     }
 
     void playerJump()
     {
-        if(Input.GetButtonDown("Jump") && isGrounded){
+        if(Input.GetButtonDown("Jump") && _isGrounded)
+        {
 
-            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);  //Physic equation to calculate jump velocity 
+            _velocity.y = Mathf.Sqrt(_jumpHeight * -2f * _gravity);  //Physic equation to calculate jump velocity 
 
         }
     }
