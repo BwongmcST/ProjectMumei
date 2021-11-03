@@ -6,12 +6,12 @@ public class InventoryController : MonoBehaviour
 {
     public bool inventoryIsOpen = false;
     [SerializeField]
-    private GameObject _canvas;
+    private GameObject _inventoryCanvas;
     // Start is called before the first frame update
 
     void Start()
     {
-        _canvas.SetActive(false);
+        _inventoryCanvas.SetActive(false);
     }
 
     // Update is called once per frame
@@ -23,14 +23,14 @@ public class InventoryController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.B) && inventoryIsOpen == false)
         {
-            _canvas.SetActive(true);
+            _inventoryCanvas.SetActive(true);
             inventoryIsOpen = true;
             Cursor.lockState = CursorLockMode.None;
             Debug.Log("None");
         }
         else if (Input.GetKeyDown(KeyCode.B) && inventoryIsOpen == true)
         {
-            _canvas.SetActive(false);
+            _inventoryCanvas.SetActive(false);
             inventoryIsOpen = false;
             Cursor.lockState = CursorLockMode.Locked;
             Debug.Log("Locked");

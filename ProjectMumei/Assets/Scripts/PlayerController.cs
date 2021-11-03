@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField]
+    private Camera _cam;
 
     [SerializeField]
     private CharacterController _controller;
@@ -32,7 +34,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        _cam = Camera.main;
     }
 
     // Update is called once per frame
@@ -66,8 +68,6 @@ public class PlayerController : MonoBehaviour
     void CheckGrounded()
     {
         _isGrounded = Physics.CheckSphere(_groundCheck.position, _groundDistance, _groundMask);
-        //Debug.Log(_isGrounded);
-        //Debug.Log(_velocity);
 
         if(_isGrounded && _velocity.y < 0)
         {
@@ -82,6 +82,14 @@ public class PlayerController : MonoBehaviour
 
             _velocity.y = Mathf.Sqrt(_jumpHeight * -2f * _gravity);  //Physic equation to calculate jump velocity 
 
+        }
+    }
+
+    void MouseInteract()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+          
         }
     }
 }
