@@ -5,8 +5,7 @@ using UnityEngine;
 public class InventoryController : MonoBehaviour
 {
     public bool inventoryIsOpen = false;
-    [SerializeField]
-    private GameObject _inventoryCanvas;
+    [SerializeField] private GameObject _inventoryCanvas;
     // Start is called before the first frame update
 
     void Start()

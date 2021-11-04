@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class PlayerRaycasting : MonoBehaviour
 {
-    [SerializeField]
-    private float _pickupDistance = 5;
-
-    private RaycastHit _itemHit;
+    [SerializeField] private float _pickupDistance = 5;
+    public RaycastHit interactiveItemHit;
 
     // Start is called before the first frame update
     void Start()
@@ -18,24 +16,24 @@ public class PlayerRaycasting : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        raycasting();
-        intertactingObject();
+        Raycasting();
+        //IntertactingObject();
     }
 
-    void raycasting()
+    void Raycasting()
     {
         Debug.DrawRay(this.transform.position, this.transform.forward * _pickupDistance, Color.red);
-        Physics.Raycast(this.transform.position, this.transform.forward, out _itemHit, _pickupDistance);
+        Physics.Raycast(this.transform.position, this.transform.forward, out interactiveItemHit, _pickupDistance);
         
     }
 
-    void intertactingObject()
+  /*  void IntertactingObject()
     {
-        if(Input.GetKeyDown(KeyCode.E) && _itemHit.collider != null && _itemHit.collider.gameObject.tag == "Interactable")
+        if(Input.GetKeyDown(KeyCode.E) && _interactiveItemHit.collider != null && _interactiveItemHit.collider.gameObject.tag == "Interactable")
         {
             Debug.Log("Interactable");
         }
-    }
+    }*/
 
 
 }

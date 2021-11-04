@@ -4,13 +4,9 @@ using UnityEngine;
 
 public class PlayerViewController : MonoBehaviour
 {
-    [SerializeField]
-    private float mouseSpeed = 150f;
-    [SerializeField]
-    private Transform playerBody;
-    [SerializeField]
-    private InventoryController inventoryController;
-
+    [SerializeField] private float mouseSpeed = 150f;
+    [SerializeField] private Transform playerBody;
+    [SerializeField] private InventoryController inventoryController;
     private float _xRotation = 0f;
 
     // Start is called before the first frame update

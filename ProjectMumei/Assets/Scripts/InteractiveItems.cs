@@ -2,10 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Interacable : MonoBehaviour
+public class InteractiveItems : MonoBehaviour
 {
-    [SerializeField] private float _radius = 2f;
-
+    public Item item;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,14 +14,12 @@ public class Interacable : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 
-    private void OnDrawGizmosSelected()
+    void Pickup()
     {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, _radius);
-
+        Debug.Log("Item" + item.name + "pickedup");
+        ItemInventory.instance.Add(item);
     }
-
 }
