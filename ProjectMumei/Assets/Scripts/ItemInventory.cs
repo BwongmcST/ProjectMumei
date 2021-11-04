@@ -17,7 +17,7 @@ public class ItemInventory : MonoBehaviour
     }
 
     public List<Item> items = new List<Item>();
-    [SerializeField] private int space = 2;
+    [SerializeField] private int space = 12;
     public bool bagIsFull;
 
     public delegate void OnItemChange();   //---
