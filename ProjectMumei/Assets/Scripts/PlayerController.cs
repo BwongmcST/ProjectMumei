@@ -78,7 +78,11 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.S) == false)
         {
-            _playerMoveSpeed = _runSpeed;
+            if (_isGrounded == true)
+            {
+                _playerMoveSpeed = _runSpeed;
+            }
+
 
         }else if (Input.GetKey(KeyCode.S))
         {

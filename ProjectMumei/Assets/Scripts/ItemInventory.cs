@@ -6,6 +6,13 @@ public class ItemInventory : MonoBehaviour
 {
 
     public static ItemInventory instance;
+    public List<Item> items = new List<Item>();
+    [SerializeField] private int space = 12;
+    public bool bagIsFull;
+
+    public delegate void OnItemChange();   //---
+    public OnItemChange onItemChangedCallback;
+
     private void Awake()
     {
         if(instance != null)
@@ -15,14 +22,6 @@ public class ItemInventory : MonoBehaviour
         }
         instance = this;
     }
-
-    public List<Item> items = new List<Item>();
-    [SerializeField] private int space = 12;
-    public bool bagIsFull;
-
-    public delegate void OnItemChange();   //---
-    public OnItemChange onItemChangedCallback;
-
     public void Add (Item item)
     {
         if(items.Count >= space)

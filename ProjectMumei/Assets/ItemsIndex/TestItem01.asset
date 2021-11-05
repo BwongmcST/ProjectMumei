@@ -15,3 +15,4 @@ MonoBehaviour:
   name: TestItem01
   icon: {fileID: 21300000, guid: 5d9ba4e7d0964044ea54abe409d81dfd, type: 3}
   isDefaultItem: 0
+  prefab: {fileID: 9168159835062917050, guid: 2cd7d563853dcb34883f777653b1e64e, type: 3}

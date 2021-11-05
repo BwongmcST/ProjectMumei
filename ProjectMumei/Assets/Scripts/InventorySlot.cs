@@ -6,19 +6,16 @@ using UnityEngine.UI;
 public class InventorySlot : MonoBehaviour
 {
     private Item _item;
-
     public Image icon;
+    private Button button;
+    [SerializeField] private GameObject _itemPrefab;
+    [SerializeField] private Transform _itemDropPosition;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        button = gameObject.GetComponentInChildren<Button>();
+        button.interactable = false;
     }
 
     public void AddItem(Item newItem)
@@ -26,12 +23,22 @@ public class InventorySlot : MonoBehaviour
         _item = newItem;
         icon.sprite = _item.icon;
         icon.enabled = true;
+        _itemPrefab = _item.prefab;
+        button.interactable = true;
+        Debug.Log("Get Item Prefab" + _itemPrefab);
     }
 
     public void ClearSlot()
     {
         _item = null;
-        //icon.sprite = null;
-       // icon.enabled = false;
+        icon.sprite = null;
+        icon.enabled = false;
+        button.interactable = false;
+        Debug.Log("Drop Item" + _itemPrefab);
+    }
+    public void OnMouseRightClickRemove()
+    {
+        ItemInventory.instance.RemoveItem(_item);
+
     }
 }
