@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         PlayerMovement();
         PlayerFall();
         CheckGrounded();
@@ -57,7 +58,7 @@ public class PlayerController : MonoBehaviour
     void CheckGrounded()
     {
         _isGrounded = Physics.CheckSphere(_groundCheck.position, _groundDistance, _groundMask);
-
+        Debug.Log(_groundCheck.position);
         if (_isGrounded && _velocity.y < 0)
         {
             _velocity.y = -1f;
@@ -82,7 +83,6 @@ public class PlayerController : MonoBehaviour
             {
                 _playerMoveSpeed = _runSpeed;
             }
-
 
         }else if (Input.GetKey(KeyCode.S))
         {

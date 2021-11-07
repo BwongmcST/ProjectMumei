@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerRaycasting : MonoBehaviour
 {
-    [SerializeField] private float _pickupDistance = 5;
+    [SerializeField] private float _pickupDistance = 7;
     public RaycastHit interactiveItemHit;
 
     // Start is called before the first frame update
