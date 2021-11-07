@@ -10,7 +10,6 @@ namespace InventorySystem
 
         void Pickup()
         {
-            Debug.Log("Item" + item.name + "pickedup");
             ItemInventory.instance.Add(item);
         }
     }

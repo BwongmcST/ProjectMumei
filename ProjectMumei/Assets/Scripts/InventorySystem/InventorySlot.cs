@@ -10,8 +10,6 @@ namespace InventorySystem
         private Item _item;
         public Image icon;
         private Button button;
-        [SerializeField] private GameObject _itemPrefab;
-        [SerializeField] private Transform _itemDropPosition;
 
         private void Start()
         {
@@ -26,9 +24,7 @@ namespace InventorySystem
             _item = newItem;
             icon.sprite = _item.icon;
             icon.enabled = true;
-            _itemPrefab = _item.prefab;
             button.interactable = true;
-            //Debug.Log("Get Item Prefab" + _itemPrefab);
         }
 
         public void ClearSlot()
@@ -37,14 +33,20 @@ namespace InventorySystem
             icon.sprite = null;
             icon.enabled = false;
             button.interactable = false;
-            //Debug.Log("Drop Item" + _itemPrefab);
         }
         public void OnMouseRightClickRemove()
         {
             if (icon.sprite != null) //Do nothing if no item in the slot
             {
                 ItemInventory.instance.RemoveItem(_item);
-                Instantiate(_itemPrefab, new Vector3(_itemDropPosition.transform.position.x, _itemDropPosition.transform.position.y, _itemDropPosition.transform.position.z), Quaternion.identity);
+            }
+        }
+        
+        public void OnMouseLeftClickSelect()
+        {
+            if(icon.sprite != null)
+            {
+                ItemInventory.instance.ActiveItem(_item);
             }
         }
     }

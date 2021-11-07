@@ -8,14 +8,6 @@ namespace InventorySystem
     {
         [SerializeField] private PlayerRaycasting _playerRaycasting;
 
-
-        // Start is called before the first frame update
-        void Start()
-        {
-
-        }
-
-        // Update is called once per frame
         void Update()
         {
             PickUp();
@@ -26,7 +18,7 @@ namespace InventorySystem
 
             if (Input.GetKeyDown(KeyCode.E) && _playerRaycasting.interactiveItemHit.collider != null && _playerRaycasting.interactiveItemHit.collider.gameObject.tag == "Interactable")
             {
-                Debug.Log("PickingupAnItem");
+                Debug.Log("Picking up an item");
                 _playerRaycasting.interactiveItemHit.transform.SendMessage("Pickup");   //Called void ItemPickup() in InteractiveItems
 
                 if (ItemInventory.instance.bagIsFull == false)

@@ -148,7 +148,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onLeftClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4080818761335736632}
+        m_TargetAssemblyTypeName: InventorySystem.InventorySlot, Assembly-CSharp
+        m_MethodName: OnMouseLeftClickSelect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onRightClick:
     m_PersistentCalls:
       m_Calls:
@@ -292,4 +304,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 1339239249086023969}
-  _itemPrefab: {fileID: 0}

@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour
     void CheckGrounded()
     {
         _isGrounded = Physics.CheckSphere(_groundCheck.position, _groundDistance, _groundMask);
-        Debug.Log(_groundCheck.position);
+        
         if (_isGrounded && _velocity.y < 0)
         {
             _velocity.y = -1f;

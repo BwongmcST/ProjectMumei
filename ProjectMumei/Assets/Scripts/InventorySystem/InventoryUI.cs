@@ -20,12 +20,6 @@ namespace InventorySystem
             slots = itemsPartent.GetComponentsInChildren<InventorySlot>(); //Find all inventory slot and store in slots arrays
         }
 
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
-
         void UpdateUI()
         {
             for (int i = 0; i < slots.Length; i++)
