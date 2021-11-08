@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 namespace InventorySystem
 {
@@ -10,6 +11,9 @@ namespace InventorySystem
         private Item _item;
         public Image icon;
         private Button button;
+        [SerializeField] private GameObject _itemInfoPanel;
+        [SerializeField] private Text _ItemNameText;
+        [SerializeField] private Text _itemInfoText;
 
         private void Start()
         {
@@ -39,15 +43,42 @@ namespace InventorySystem
             if (icon.sprite != null) //Do nothing if no item in the slot
             {
                 ItemInventory.instance.RemoveItem(_item);
+                CloseItemPanel();
             }
         }
-        
+
         public void OnMouseLeftClickSelect()
         {
-            if(icon.sprite != null)
+            if (icon.sprite != null)
             {
                 ItemInventory.instance.ActiveItem(_item);
+                CloseItemPanel();
             }
+        }
+
+        public void OnPointerOver()       // Show item details when mouse point over the inventory button
+        {
+            if (icon.sprite != null)
+            {
+                ItemInventory.instance.ShowItemInfo(_item);
+                _itemInfoPanel.SetActive(true);
+                _ItemNameText.text = ItemInventory.instance.selectedItemName;
+                _itemInfoText.text = ItemInventory.instance.selectedItemInfo;
+            }
+        }
+        public void OnPointerExit()       // Show item details when mouse point over the inventory button
+        {
+            if(_itemInfoPanel.activeSelf == true)
+            {
+                CloseItemPanel();
+            }
+        }
+
+        public void CloseItemPanel()
+        {
+            _itemInfoPanel.SetActive(false);
+            _ItemNameText.text = null;
+            _itemInfoText.text = null;
         }
     }
 }

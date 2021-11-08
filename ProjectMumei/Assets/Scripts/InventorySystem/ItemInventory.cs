@@ -8,9 +8,14 @@ namespace InventorySystem
     public class ItemInventory : MonoBehaviour
     {
         [SerializeField] private Transform _itemDropPosition;
-        private Item activeItem;
+        public Item activeItem;
         [SerializeField] private Image _activeIcon;
         [SerializeField] private Sprite _defaultActiveIcon;
+        [SerializeField] private Transform _equipmentPos;
+        [SerializeField] private GameObject _equipPrefab;
+
+        public string selectedItemInfo;
+        public string selectedItemName;
 
         public static ItemInventory instance;
         public List<Item> items = new List<Item>();
@@ -18,7 +23,7 @@ namespace InventorySystem
         public bool bagIsFull;
         public GameObject dropPrefab; //new
 
-        public delegate void OnItemChange();  
+        public delegate void OnItemChange();
         public OnItemChange onItemChangedCallback;
 
         private void Awake()
@@ -58,11 +63,13 @@ namespace InventorySystem
             {
                 activeItem = null;
                 _activeIcon.sprite = _defaultActiveIcon;
+
             }
 
             if (onItemChangedCallback != null)
             {
                 onItemChangedCallback.Invoke();
+                Destroy(_equipPrefab);
             }
         }
 
@@ -70,6 +77,23 @@ namespace InventorySystem
         {
             activeItem = item;
             _activeIcon.sprite = activeItem.icon;
+
+            if (activeItem.isWeapon == true)
+            {
+                _equipPrefab = Instantiate(activeItem.prefab, _equipmentPos);
+                Destroy(_equipPrefab.GetComponent<Rigidbody>());
+            }
+            else
+            {
+                Destroy(_equipPrefab);
+            }
         }
+
+        public void ShowItemInfo(Item item)
+        {
+            selectedItemName = item.name;
+            selectedItemInfo = item.description;
+        }
+
     }
 }
