@@ -82,6 +82,7 @@ namespace InventorySystem
             {
                 _equipPrefab = Instantiate(activeItem.prefab, _equipmentPos);
                 Destroy(_equipPrefab.GetComponent<Rigidbody>());
+                _equipPrefab.GetComponentInChildren<Gun>().enabled = true;
             }
             else
             {
