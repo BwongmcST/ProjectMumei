@@ -6,17 +6,40 @@ namespace LevelManagement
 {
     public class MenuManager : MonoBehaviour
     {
-        public Menu mainMenuPrefab;
-        public Menu settingMenuPrefab;
-        public Menu creditsScreenPrefab;
+        public MainMenu mainMenuPrefab;
+        public SettingsMenu settingMenuPrefab;
+        public CreditsMenu creditsScreenPrefab;
+        public LoadingScreen loadingScreenPrefab;
 
         [SerializeField] private Transform _menuParent;
 
         private Stack<Menu> _menuStack = new Stack<Menu>();
 
+        private static MenuManager _instance;
+        public static MenuManager instance
+        {
+            get { return _instance; }
+        }
+
         private void Awake()
         {
-            InitializeMenus();
+            if(_instance != null)
+            {
+                Destroy(gameObject);
+            }
+            else
+            {
+                _instance = this;
+                InitializeMenus();
+            }
+        }
+
+        private void OnDestroy()
+        {
+            if(_instance == this)
+            {
+                _instance = null;
+            }
         }
 
         private void InitializeMenus()
@@ -26,7 +49,7 @@ namespace LevelManagement
                 GameObject menuParentObject = new GameObject("Menus");
                 _menuParent = menuParentObject.transform;
             }
-            Menu[] menuPrefabs = { mainMenuPrefab, settingMenuPrefab, creditsScreenPrefab };
+            Menu[] menuPrefabs = { mainMenuPrefab, settingMenuPrefab, creditsScreenPrefab, loadingScreenPrefab };
             
             foreach (Menu Prefab in menuPrefabs)
             {
@@ -65,7 +88,7 @@ namespace LevelManagement
             if(_menuStack.Count == 0)
             {
                 Debug.LogWarning("MENUMANAGER CloseMenu ERROR: No menus in stack");
-                return;
+               // return;
             }
             Menu topMenu = _menuStack.Pop();
             topMenu.gameObject.SetActive(false);

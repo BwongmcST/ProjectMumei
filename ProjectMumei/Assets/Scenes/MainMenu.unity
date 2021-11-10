@@ -204,7 +204,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &178697032
 GameObject:
@@ -235,6 +235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55de1c8853c0459408014aa17ca31485, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loadProgress: 0
 --- !u!4 &178697034
 Transform:
   m_ObjectHideFlags: 0
@@ -313,7 +314,37 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &826629501
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 826629502}
+  m_Layer: 0
+  m_Name: LevelLoader
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &826629502
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 826629501}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1276569080
 GameObject:
@@ -358,9 +389,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccecde5123fdf344080d90d1461de086, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainMenuPrefab: {fileID: -3911215647406995036, guid: 3867e5b88c0cf0c4ea547b49bbe866ec, type: 3}
-  settingMenuPrefab: {fileID: 8971010103354367406, guid: 178856b2d95d04d469c3e63c3d225acc, type: 3}
-  creditsScreenPrefab: {fileID: -4576121950296087348, guid: d55b64e97af42b849a6c1841eecffa54, type: 3}
+  mainMenuPrefab: {fileID: 3751048956096672270, guid: 3867e5b88c0cf0c4ea547b49bbe866ec, type: 3}
+  settingMenuPrefab: {fileID: 6762101989501508186, guid: 178856b2d95d04d469c3e63c3d225acc, type: 3}
+  creditsScreenPrefab: {fileID: 8884056250626586378, guid: d55b64e97af42b849a6c1841eecffa54, type: 3}
+  loadingScreenPrefab: {fileID: 7404029870681633559, guid: fb6cf4608b8965a4dbe42305c862417d, type: 3}
   _menuParent: {fileID: 0}
 --- !u!1 &1321233441
 GameObject:
@@ -453,7 +485,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &1395013944
 GameObject:
@@ -485,5 +517,5 @@ Transform:
   - {fileID: 178697034}
   - {fileID: 1276569081}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

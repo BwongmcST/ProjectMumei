@@ -255,8 +255,8 @@ GameObject:
   - component: {fileID: 4532654673848993359}
   - component: {fileID: 4532654673848993358}
   - component: {fileID: 4532654673848993353}
-  - component: {fileID: 4532654673848993352}
-  - component: {fileID: -4576121950296087348}
+  - component: {fileID: 8884056250626586378}
+  - component: {fileID: 7113759665973184356}
   m_Layer: 5
   m_Name: CreditsMenu
   m_TagString: Untagged
@@ -330,7 +330,19 @@ MonoBehaviour:
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
   m_PresetInfoIsWorld: 0
---- !u!114 &4532654673848993352
+--- !u!114 &8884056250626586378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4532654673848993355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 831632de00abeb2478b09e159df9c97b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7113759665973184356
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -347,18 +359,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &-4576121950296087348
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4532654673848993355}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f1c3eaf2fe51d04c867e07c607b431c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &4532654673889665654
 GameObject:
   m_ObjectHideFlags: 0
@@ -648,8 +648,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: -4576121950296087348}
-        m_TargetAssemblyTypeName: LevelManagement.Menu, Assembly-CSharp
+      - m_Target: {fileID: 8884056250626586378}
+        m_TargetAssemblyTypeName: LevelManagement.CreditsMenu, Assembly-CSharp
         m_MethodName: OnBackPressed
         m_Mode: 1
         m_Arguments:

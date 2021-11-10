@@ -5,7 +5,25 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-  
+    public float loadProgress;
+    private static GameManager _instance;
+    public static GameManager instance
+    {
+        get { return _instance; }
+    }
+
+    private void Awake()
+    {
+        if (_instance != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
+    }
+
     public void ReloadLevel()
     {
         Scene currentScene = SceneManager.GetActiveScene();
@@ -16,7 +34,7 @@ public class GameManager : MonoBehaviour
     {
         if(levelIndex >= 0 && levelIndex < SceneManager.sceneCountInBuildSettings)
         {
-            SceneManager.LoadScene(levelIndex);
+            StartCoroutine(LoadAsynchoronously(levelIndex));
         }
         else
         {
@@ -29,5 +47,16 @@ public class GameManager : MonoBehaviour
         LoadLevel(nextSceneIndex);
     }
 
+    IEnumerator LoadAsynchoronously(int LevelIndex)
+    {
+        AsyncOperation operation = SceneManager.LoadSceneAsync(LevelIndex);
+        while (!operation.isDone)
+        {
+            float loadProgress = Mathf.Clamp01(operation.progress / 0.9f);  //Clamps value between 0 and 1 and returns value.
+            Debug.Log(loadProgress);
+
+            yield return null;
+        }
+    }
 
 }

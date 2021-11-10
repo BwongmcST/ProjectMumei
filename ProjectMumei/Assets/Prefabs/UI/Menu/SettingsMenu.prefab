@@ -91,7 +91,7 @@ GameObject:
   - component: {fileID: 9072480597323123901}
   - component: {fileID: 9072480597323123898}
   - component: {fileID: 9072480597323123899}
-  - component: {fileID: 8971010103354367406}
+  - component: {fileID: 6762101989501508186}
   m_Layer: 5
   m_Name: SettingsMenu
   m_TagString: Untagged
@@ -182,7 +182,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &8971010103354367406
+--- !u!114 &6762101989501508186
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -191,7 +191,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 9072480597323123896}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f1c3eaf2fe51d04c867e07c607b431c, type: 3}
+  m_Script: {fileID: 11500000, guid: f1b730329854c634a8af71879182c79a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &9072480597573818149
@@ -548,7 +548,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 9072480598071600037}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6762101989501508186}
+        m_TargetAssemblyTypeName: LevelManagement.SettingsMenu, Assembly-CSharp
+        m_MethodName: OnMasterSoundPressed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &9072480598198755646
 GameObject:
   m_ObjectHideFlags: 0
@@ -837,7 +849,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 9072480598451301662}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6762101989501508186}
+        m_TargetAssemblyTypeName: LevelManagement.SettingsMenu, Assembly-CSharp
+        m_MethodName: OnFXVolumnPressed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &9072480598784851444
 GameObject:
   m_ObjectHideFlags: 0
@@ -1037,7 +1061,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 9072480598805162046}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6762101989501508186}
+        m_TargetAssemblyTypeName: LevelManagement.SettingsMenu, Assembly-CSharp
+        m_MethodName: OnMusicVolumnPressed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &9072480598970148415
 GameObject:
   m_ObjectHideFlags: 0
@@ -1300,8 +1336,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8971010103354367406}
-        m_TargetAssemblyTypeName: LevelManagement.Menu, Assembly-CSharp
+      - m_Target: {fileID: 6762101989501508186}
+        m_TargetAssemblyTypeName: LevelManagement.SettingsMenu, Assembly-CSharp
         m_MethodName: OnBackPressed
         m_Mode: 1
         m_Arguments:
