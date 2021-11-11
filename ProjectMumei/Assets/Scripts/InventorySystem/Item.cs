@@ -7,7 +7,9 @@ public class Item : ScriptableObject
     public Sprite icon = null;
     public GameObject prefab;
     public bool isWeapon;
-    public int weaponType;
+    public int weaponIndex;
+    public bool isKey;
+    public int keyIndex;
     public string description;
 
 }

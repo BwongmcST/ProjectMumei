@@ -26,6 +26,7 @@ namespace InventorySystem
             {
                 _inventoryCanvas.SetActive(true);
                 inventoryIsOpen = true;
+                ItemInventory.instance.bagIsOpen = inventoryIsOpen;
                 Cursor.lockState = CursorLockMode.None;
                 //Debug.Log("None");
             }
@@ -33,6 +34,7 @@ namespace InventorySystem
             {
                 _inventoryCanvas.SetActive(false);
                 inventoryIsOpen = false;
+                ItemInventory.instance.bagIsOpen = inventoryIsOpen;
                 Cursor.lockState = CursorLockMode.Locked;
                 //Debug.Log("Locked");
             }

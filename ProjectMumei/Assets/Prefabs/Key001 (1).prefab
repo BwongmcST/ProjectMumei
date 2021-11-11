@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 9168159835062917049}
   m_Layer: 0
   m_Name: Key001 (1)
-  m_TagString: Interactable
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using InventorySystem;
 // **This script should not enable in the object by default**
 public class Gun : MonoBehaviour
 {
@@ -27,7 +28,7 @@ public class Gun : MonoBehaviour
 
     void Shoot()
     {
-        if (Input.GetButtonDown("Fire1") && Time.time >= _nextTimeToFire)
+        if (Input.GetButtonDown("Fire1") && Time.time >= _nextTimeToFire && ItemInventory.instance.bagIsOpen != true) 
         {
             _nextTimeToFire = Time.time + 1f / _firerate;
             RaycastHit hit;

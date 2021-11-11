@@ -6,25 +6,29 @@ using UnityEngine.UI;
 namespace InventorySystem
 {
     public class ItemInventory : MonoBehaviour
-    {
+    { 
+
+        [SerializeField] private int space = 12;
+        public delegate void OnItemChange();
+        public OnItemChange onItemChangedCallback;
+
+        [Header("Drag to Pre-Assign:")]
         [SerializeField] private Transform _itemDropPosition;
-        public Item activeItem;
         [SerializeField] private Image _activeIcon;
         [SerializeField] private Sprite _defaultActiveIcon;
         [SerializeField] private Transform _equipmentPos;
-        [SerializeField] private GameObject _equipPrefab;
 
+        [Header("Auto Assign")]
+        [SerializeField] private GameObject _equipPrefab;
+        public Item activeItem;
         public string selectedItemInfo;
         public string selectedItemName;
-
-        public static ItemInventory instance;
-        public List<Item> items = new List<Item>();
-        [SerializeField] private int space = 12;
         public bool bagIsFull;
+        public bool bagIsOpen;
         public GameObject dropPrefab; //new
 
-        public delegate void OnItemChange();
-        public OnItemChange onItemChangedCallback;
+        public List<Item> items = new List<Item>();
+        public static ItemInventory instance;
 
         private void Awake()
         {

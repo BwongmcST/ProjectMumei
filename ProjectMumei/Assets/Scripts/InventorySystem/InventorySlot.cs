@@ -9,8 +9,10 @@ namespace InventorySystem
     public class InventorySlot : MonoBehaviour
     {
         private Item _item;
-        public Image icon;
         private Button button;
+
+        [Header("Drag to Pre-Assign:")]
+        public Image icon;
         [SerializeField] private GameObject _itemInfoPanel;
         [SerializeField] private Text _ItemNameText;
         [SerializeField] private Text _itemInfoText;
