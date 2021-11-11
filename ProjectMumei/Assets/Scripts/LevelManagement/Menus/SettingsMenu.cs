@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace LevelManagement
 {
-    public class SettingsMenu : Menu
+    public class SettingsMenu : Menu<SettingsMenu>
     {
         public override void OnBackPressed()
         {

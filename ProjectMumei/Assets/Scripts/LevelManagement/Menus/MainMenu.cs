@@ -4,12 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 
 namespace LevelManagement {
-    public class MainMenu : Menu
+    public class MainMenu : Menu<MainMenu>
     {
         public Slider slider;
+        public Menu LoadingScreen;
         public void OnScreenLoading()  // loading Screen & Loading Bar (Couldn't test the function because it loads too fast, but no error so far)
         {
-            Menu LoadingScreen = transform.parent.Find("LoadingScreen(Clone)").GetComponent<Menu>();
+            LoadingScreen = transform.parent.Find("LoadingScreen(Clone)").GetComponent<Menu>();
             slider = transform.parent.Find("LoadingScreen(Clone)").GetComponentInChildren<Slider>();
             MenuManager.instance.OpenMenu(LoadingScreen);
             slider.value = GameManager.instance.loadProgress;
@@ -17,9 +18,9 @@ namespace LevelManagement {
 
         public void OnPlayPressed()
         {
-            OnScreenLoading();
             if (GameManager.instance != null)
             {
+                OnScreenLoading();
                 GameManager.instance.LoadNexLevel();
             }
 
@@ -27,18 +28,16 @@ namespace LevelManagement {
 
         public void OnSettingsPressed()
         {
-            Menu settingsMenu = transform.parent.Find("SettingsMenu(Clone)").GetComponent<Menu>();
-            if (MenuManager.instance != null && settingsMenu != null)
+            if (MenuManager.instance != null && SettingsMenu.instance != null)
             {
-                MenuManager.instance.OpenMenu(settingsMenu);
+                MenuManager.instance.OpenMenu(SettingsMenu.instance);
             }
         }
         public void OnCreditsPressed()
         {
-            Menu creditsMenu = transform.parent.Find("CreditsMenu(Clone)").GetComponent<Menu>();
-            if (MenuManager.instance != null && creditsMenu != null)
+            if (MenuManager.instance != null && CreditsMenu.instance != null)
             {
-                MenuManager.instance.OpenMenu(creditsMenu);
+                MenuManager.instance.OpenMenu(CreditsMenu.instance);
             }
         }
         public override void OnBackPressed()
@@ -46,4 +45,6 @@ namespace LevelManagement {
             Application.Quit();
         }
     }
+
+
 }

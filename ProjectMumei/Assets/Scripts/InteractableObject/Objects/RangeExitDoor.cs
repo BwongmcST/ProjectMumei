@@ -27,7 +27,7 @@ public class RangeExitDoor : InteractableObject
         }
         else
         {
-            Debug.Log("Door Opened");
+            GameManager.instance.LoadNexLevel();
         }
     }
 

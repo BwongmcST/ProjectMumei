@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using LevelManagement;
 
 public class GameManager : MonoBehaviour
 {
     public float loadProgress;
     private static GameManager _instance;
+    [SerializeField] private int _mainMenuIndex = 0;
     public static GameManager instance
     {
         get { return _instance; }
@@ -21,6 +23,7 @@ public class GameManager : MonoBehaviour
         else
         {
             _instance = this;
+            DontDestroyOnLoad(gameObject);
         }
     }
 
@@ -34,6 +37,12 @@ public class GameManager : MonoBehaviour
     {
         if(levelIndex >= 0 && levelIndex < SceneManager.sceneCountInBuildSettings)
         {
+            if (levelIndex == _mainMenuIndex && MenuManager.instance != null && MainMenu.instance != null)
+            {
+                Cursor.lockState = CursorLockMode.None;
+                MenuManager.instance.OpenMenu(MainMenu.instance);
+            }
+
             StartCoroutine(LoadAsynchoronously(levelIndex));
         }
         else
@@ -53,7 +62,7 @@ public class GameManager : MonoBehaviour
         while (!operation.isDone)
         {
             float loadProgress = Mathf.Clamp01(operation.progress / 0.9f);  //Clamps value between 0 and 1 and returns value.
-            Debug.Log(loadProgress);
+            //Debug.Log(loadProgress);
 
             yield return null;
         }

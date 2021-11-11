@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace LevelManagement {
-    public class CreditsMenu : Menu
+    public class CreditsMenu : Menu<CreditsMenu>
     {
         public override void OnBackPressed()
         {

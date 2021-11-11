@@ -31,6 +31,7 @@ namespace LevelManagement
             {
                 _instance = this;
                 InitializeMenus();
+                DontDestroyOnLoad(gameObject);
             }
         }
 
@@ -49,6 +50,7 @@ namespace LevelManagement
                 GameObject menuParentObject = new GameObject("Menus");
                 _menuParent = menuParentObject.transform;
             }
+            Object.DontDestroyOnLoad(_menuParent.gameObject);
             Menu[] menuPrefabs = { mainMenuPrefab, settingMenuPrefab, creditsScreenPrefab, loadingScreenPrefab };
             
             foreach (Menu Prefab in menuPrefabs)
@@ -98,6 +100,16 @@ namespace LevelManagement
                 Menu nextMenu = _menuStack.Peek();
                 nextMenu.gameObject.SetActive(true);
             }
-        }  
+        }
+        
+        public void CloseAllMenu()
+        {
+            while (_menuStack.Count != 0)
+            {
+                Menu topMenu = _menuStack.Pop();
+                topMenu.gameObject.SetActive(false);
+            }
+            
+        }
     }
 }
