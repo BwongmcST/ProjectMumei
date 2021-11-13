@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using SaveData;
 
 public class PlayerController : MonoBehaviour
 {
@@ -18,14 +19,18 @@ public class PlayerController : MonoBehaviour
     private bool _isGrounded;
     private Vector3 _velocity;
 
-    // Start is called before the first frame update
+    //Temp Save&Load Function//
+    [SerializeField] private float _playerHP = 100f;
+    [SerializeField] private DataManager _dataManager;
+    //Temp Save&Load Function//
+
+
     void Start()
     {
         _cam = Camera.main;
         _defaultPlayerMoveSpeed = _playerMoveSpeed;
     }
 
-    // Update is called once per frame
     void Update()
     {
 
@@ -34,6 +39,11 @@ public class PlayerController : MonoBehaviour
         CheckGrounded();
         PlayerJump();
         playerSpeedChange();
+
+        //Temp Save&Load Function//
+        OnPlayerSaveInCheckPoint();
+        OnPlayerLoadInCheckPoint();
+        //Temp Save&Load Function//
 
     }
     void PlayerMovement()
@@ -94,5 +104,34 @@ public class PlayerController : MonoBehaviour
         }
 
     }
+
+    //Temp Save&Load Function//
+    public void OnPlayerSaveInCheckPoint()
+    {
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            if (_dataManager != null)
+            {
+                _dataManager.PlayerHP = _playerHP;
+                _dataManager.Save();
+            }
+        }
+    }
+   
+    public void OnPlayerLoadInCheckPoint()
+    {
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            LoadData();
+        }
+    }
+
+    public void LoadData()
+    {
+        _dataManager.Load();
+        _playerHP = _dataManager.PlayerHP;
+    }
+
+    //Temp Save&Load Function//
 
 }
