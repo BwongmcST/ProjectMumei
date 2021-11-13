@@ -9,7 +9,9 @@ namespace LevelManagement
         public MainMenu mainMenuPrefab;
         public SettingsMenu settingMenuPrefab;
         public CreditsMenu creditsScreenPrefab;
+        public PauseMenu pauseMenuPrefab;
         public LoadingScreen loadingScreenPrefab;
+        public bool isPaused = false;
 
         [SerializeField] private Transform _menuParent;
 
@@ -51,7 +53,7 @@ namespace LevelManagement
                 _menuParent = menuParentObject.transform;
             }
             Object.DontDestroyOnLoad(_menuParent.gameObject);
-            Menu[] menuPrefabs = { mainMenuPrefab, settingMenuPrefab, creditsScreenPrefab, loadingScreenPrefab };
+            Menu[] menuPrefabs = { mainMenuPrefab, settingMenuPrefab, creditsScreenPrefab, loadingScreenPrefab, pauseMenuPrefab };
             
             foreach (Menu Prefab in menuPrefabs)
             {
@@ -69,7 +71,7 @@ namespace LevelManagement
 
         public void OpenMenu(Menu menuInstance)
         {
-            if(menuInstance == null)
+            if (menuInstance == null)
             {
                 Debug.LogWarning("MENUMANAGER OpenMenu ERROR: invalid menu");
                 return;

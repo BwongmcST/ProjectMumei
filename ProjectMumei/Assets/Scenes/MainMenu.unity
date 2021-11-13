@@ -236,6 +236,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadProgress: 0
+  _mainMenuIndex: 0
 --- !u!4 &178697034
 Transform:
   m_ObjectHideFlags: 0
@@ -392,6 +393,7 @@ MonoBehaviour:
   mainMenuPrefab: {fileID: 3751048956096672270, guid: 3867e5b88c0cf0c4ea547b49bbe866ec, type: 3}
   settingMenuPrefab: {fileID: 6762101989501508186, guid: 178856b2d95d04d469c3e63c3d225acc, type: 3}
   creditsScreenPrefab: {fileID: 8884056250626586378, guid: d55b64e97af42b849a6c1841eecffa54, type: 3}
+  pauseMenuPrefab: {fileID: 1683556082875270632, guid: 92fe374c6656fcd4c8f00fa05fc6557f, type: 3}
   loadingScreenPrefab: {fileID: 7404029870681633559, guid: fb6cf4608b8965a4dbe42305c862417d, type: 3}
   _menuParent: {fileID: 0}
 --- !u!1 &1321233441

@@ -5,7 +5,12 @@ using LevelManagement;
 
 public class LevelManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField] private Canvas _canvas;
+
+    private void Awake()
+    {
+        _canvas.gameObject.SetActive(true);
+    }
     void Start()
     {    
         if(MainMenu.instance.LoadingScreen != null)
@@ -19,6 +24,17 @@ public class LevelManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        PauseLevel();
+    }
+
+    private void PauseLevel()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape) && MenuManager.instance.isPaused != true)
+        {
+            MenuManager.instance.OpenMenu(PauseMenu.instance);  
+            Time.timeScale = 0;
+            Cursor.lockState = CursorLockMode.None;
+            MenuManager.instance.isPaused = true;
+        }
     }
 }

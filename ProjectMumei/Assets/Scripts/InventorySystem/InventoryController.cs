@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using LevelManagement;
 
 namespace InventorySystem
 {
@@ -22,7 +23,7 @@ namespace InventorySystem
         }
         void InventoryOnOff()
         {
-            if (Input.GetKeyDown(KeyCode.B) && inventoryIsOpen == false)
+            if (Input.GetKeyDown(KeyCode.B) && inventoryIsOpen == false && MenuManager.instance.isPaused != true)
             {
                 _inventoryCanvas.SetActive(true);
                 inventoryIsOpen = true;
