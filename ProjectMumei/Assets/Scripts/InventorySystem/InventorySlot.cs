@@ -51,7 +51,7 @@ namespace InventorySystem
 
         public void OnMouseLeftClickSelect()
         {
-            if (icon.sprite != null)
+            if (icon.sprite != null && ItemInventory.instance.activeItem != _item)
             {
                 ItemInventory.instance.ActiveItem(_item);
                 CloseItemPanel();
