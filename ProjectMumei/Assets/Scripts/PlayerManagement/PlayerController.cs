@@ -8,6 +8,7 @@ namespace PlayerManagement
     public class PlayerController : MonoBehaviour
     {
         [SerializeField] private int _maxHealth = 100;
+        [SerializeField] private int _maxStamina = 100;
         [SerializeField] private Camera _cam;
         [SerializeField] private CharacterController _controller;
         [SerializeField] private float _playerMoveSpeed = 6f;
@@ -18,11 +19,15 @@ namespace PlayerManagement
         [SerializeField] private Transform _groundCheck;
         [SerializeField] private LayerMask _groundMask;
         [SerializeField] private float _jumpHeight = 3f;
-        [SerializeField] private HPBar _hpBar;
+        [SerializeField] private StateBar _stateBar;
+        [SerializeField] private float _spentStamina;
+        [SerializeField] private float _staminaRecoverSpeed;
+        private bool _isoutOfStamina = false;
         private float _groundDistance = 0.4f;
         private bool _isGrounded;
         private Vector3 _velocity;
         private int _currentHealth;
+        private float _currentStamina;
 
         //Temp Save&Load Function//
         [SerializeField] private float _playerHP = 100f;
@@ -34,7 +39,7 @@ namespace PlayerManagement
         {
             _cam = Camera.main;
             _defaultPlayerMoveSpeed = _playerMoveSpeed;
-            InitializeHPBar();
+            InitializeStaticBar();
         }
 
         void Update()
@@ -44,15 +49,14 @@ namespace PlayerManagement
             PlayerFall();
             CheckGrounded();
             PlayerJump();
-            playerSpeedChange();
-            PlayerIsDead(_currentHealth);
-
+            PlayerSpeedChange();
+            PlayerState();
+            OnTakingDamageHPBarChange();
+         
             //Temp Save&Load Function//
             OnPlayerSaveInCheckPoint();
             OnPlayerLoadInCheckPoint();
             //Temp Save&Load Function//
-
-            TestHPBar();
 
         }
         void PlayerMovement()
@@ -94,10 +98,12 @@ namespace PlayerManagement
             }
         }
 
-        void playerSpeedChange()    // change player's speed if different key pressed
+        void PlayerSpeedChange()    // change player's speed if different key pressed
         {
-            if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.S) == false)
+            if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.S) == false && _isoutOfStamina != true)
             {
+                OnRunningStaminaBarChange();
+
                 if (_isGrounded == true)
                 {
                     _playerMoveSpeed = _runSpeed;
@@ -107,10 +113,13 @@ namespace PlayerManagement
             else if (Input.GetKey(KeyCode.S))
             {
                 _playerMoveSpeed = _slowWalkspeed;
+                StaminaRecoever();
             }
             else
             {
                 _playerMoveSpeed = _defaultPlayerMoveSpeed;
+                _currentStamina += _staminaRecoverSpeed * Time.deltaTime;
+                StaminaRecoever();
             }
 
         }
@@ -149,17 +158,19 @@ namespace PlayerManagement
         void TakeDamage(int damage)
         {
             _currentHealth -= damage;
-            _hpBar.SetHealth(_currentHealth);
+            _stateBar.SetHealth(_currentHealth);
             
         }
 
-        private void InitializeHPBar()
+        private void InitializeStaticBar()
         {
             _currentHealth = _maxHealth;
-            _hpBar.SetMaxHealth(_maxHealth);
+            _stateBar.SetMaxHealth(_maxHealth);
+            _currentStamina = _maxStamina;
+            _stateBar.SetMaxStamina(_maxStamina);
         }
 
-        private void TestHPBar()
+        private void OnTakingDamageHPBarChange()
         {
             if (Input.GetKeyDown(KeyCode.T))
             {
@@ -167,17 +178,54 @@ namespace PlayerManagement
             }
         }
 
+        private void OnRunningStaminaBarChange()
+        {
+            if (_isoutOfStamina != true)
+            {
+                _currentStamina -= _spentStamina * Time.deltaTime;
+                _stateBar.SetStamina(_currentStamina);
+            }
+        }
+
+        private void PlayerState()
+        {
+            PlayerIsDead(_currentHealth);
+            OutOfStamina(_currentStamina);
+        }
+
+
         private bool PlayerIsDead(int health)
         {
             if(health <= 0)
             {
-                Debug.Log("Player Is Dead");
                 return true;
             }
             else
             {
-                Debug.Log("Alive");
                 return false;
+            }
+        }
+
+        private bool OutOfStamina(float stamina)
+        {
+            if (stamina <= 0)
+            {
+                _isoutOfStamina = true;
+                Debug.Log(_isoutOfStamina);
+                return true;
+            }
+            else
+            {
+                _isoutOfStamina = false;
+                return false;
+            }
+        }
+        private void StaminaRecoever()
+        {
+            if (_currentStamina <= _maxStamina)
+            {
+                _currentStamina += _staminaRecoverSpeed * Time.deltaTime;
+                _stateBar.SetStamina(_currentStamina);
             }
         }
 
