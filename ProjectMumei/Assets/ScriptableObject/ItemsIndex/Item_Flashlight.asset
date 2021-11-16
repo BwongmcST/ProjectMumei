@@ -19,4 +19,5 @@ MonoBehaviour:
   weaponIndex: 1
   isKey: 0
   keyIndex: 0
-  description: a normal flashlight
+  description: A normal flashlight
+  scale: 2.5

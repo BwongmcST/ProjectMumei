@@ -38,13 +38,13 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6392972866082962885}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 2.1
-  m_Range: 50
+  m_Range: 60
   m_SpotAngle: 62
   m_InnerSpotAngle: 46.715996
   m_CookieSize: 10
@@ -108,6 +108,7 @@ GameObject:
   - component: {fileID: 7596294776916794123}
   - component: {fileID: 7596294776916794124}
   - component: {fileID: 3584548520218735590}
+  - component: {fileID: 2236007427837152270}
   m_Layer: 0
   m_Name: Flashlight
   m_TagString: Item
@@ -242,3 +243,16 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &2236007427837152270
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6395047641100067025}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.072043225, y: 0.23057188, z: 0.07315461}
+  m_Center: {x: -0.000000020489097, y: 0, z: 0}

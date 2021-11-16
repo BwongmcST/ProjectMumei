@@ -11,5 +11,6 @@ public class Item : ScriptableObject
     public bool isKey;
     public int keyIndex;
     public string description;
+    public float scale;
 
 }

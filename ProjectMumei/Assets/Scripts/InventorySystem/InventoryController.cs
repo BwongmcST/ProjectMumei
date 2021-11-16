@@ -23,7 +23,7 @@ namespace InventorySystem
         }
         void InventoryOnOff()
         {
-            if (Input.GetKeyDown(KeyCode.B) && inventoryIsOpen == false && MenuManager.instance.isPaused != true)
+            if (Input.GetKeyDown(KeyCode.B) && inventoryIsOpen == false /*&& MenuManager.instance.isPaused != true*/)
             {
                 _inventoryCanvas.SetActive(true);
                 inventoryIsOpen = true;

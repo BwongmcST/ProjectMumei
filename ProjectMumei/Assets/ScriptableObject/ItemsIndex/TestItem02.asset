@@ -16,5 +16,8 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 2f1eaeeaad36ee5469eff7ff158f37ba, type: 3}
   prefab: {fileID: 3266362822343542879, guid: 544004fa81541944a992a8b0d535d77e, type: 3}
   isWeapon: 0
-  weaponType: 0
+  weaponIndex: 0
+  isKey: 0
+  keyIndex: 0
   description: This is a test item 02
+  scale: 1

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 namespace InventorySystem
 {
     public class ItemInventory : MonoBehaviour
-    { 
+    {
 
         [SerializeField] private int space = 12;
         public delegate void OnItemChange();
@@ -17,10 +17,12 @@ namespace InventorySystem
         [SerializeField] private Image _activeIcon;
         [SerializeField] private Sprite _defaultActiveIcon;
         [SerializeField] private Transform _equipmentPos;
+        private Item _lastItem;
 
         [Header("Auto Assign")]
         [SerializeField] private GameObject _equipPrefab;
         public Item activeItem;
+        public bool itemIsActive = false;
         public string selectedItemInfo;
         public string selectedItemName;
         public bool bagIsFull;
@@ -28,16 +30,22 @@ namespace InventorySystem
         public GameObject dropPrefab; //new
 
         public List<Item> items = new List<Item>();
-        public static ItemInventory instance;
+        private static ItemInventory _instance;
+        public static ItemInventory instance
+        {
+            get { return _instance; }
+        }
 
         private void Awake()
         {
             if (instance != null)
             {
-                Debug.LogWarning("There is more than one instance!");
-                return;
+                Destroy(gameObject);
             }
-            instance = this;
+            else
+            {
+                _instance = this;
+            }
         }
         public void Add(Item item)
         {
@@ -60,13 +68,15 @@ namespace InventorySystem
         public void RemoveItem(Item item)
         {
             dropPrefab = item.prefab;
-            Instantiate(dropPrefab, new Vector3(_itemDropPosition.transform.position.x, _itemDropPosition.transform.position.y, _itemDropPosition.transform.position.z), Quaternion.identity);
+            GameObject newObject = Instantiate(dropPrefab, new Vector3(_itemDropPosition.transform.position.x, _itemDropPosition.transform.position.y, _itemDropPosition.transform.position.z), Quaternion.identity);
+            newObject.transform.localScale = new Vector3(item.scale, item.scale, item.scale);
             items.Remove(item);
 
             if (item == activeItem)
             {
                 activeItem = null;
                 _activeIcon.sprite = _defaultActiveIcon;
+                itemIsActive = false;
 
             }
 
@@ -79,14 +89,21 @@ namespace InventorySystem
 
         public void ActiveItem(Item item)
         {
+            itemIsActive = true;
             activeItem = item;
             _activeIcon.sprite = activeItem.icon;
 
-            if (activeItem.isWeapon == true)
+            if (activeItem.isWeapon == true && _equipPrefab == null)
             {
                 _equipPrefab = Instantiate(activeItem.prefab, _equipmentPos);
                 Destroy(_equipPrefab.GetComponent<Rigidbody>());
-                _equipPrefab.GetComponentInChildren<Gun>().enabled = true;
+                //_equipPrefab.GetComponentInChildren<Gun>().enabled = true;
+            }
+            else if (activeItem.isWeapon == true)
+            {
+                Destroy(_equipPrefab);
+                _equipPrefab = Instantiate(activeItem.prefab, _equipmentPos);
+                Destroy(_equipPrefab.GetComponent<Rigidbody>());
             }
             else
             {
@@ -98,7 +115,7 @@ namespace InventorySystem
         {
             selectedItemName = item.name;
             selectedItemInfo = item.description;
-        }
 
+        }
     }
 }

@@ -20,3 +20,4 @@ MonoBehaviour:
   isKey: 1
   keyIndex: 1
   description: This is a test item 01
+  scale: 1
