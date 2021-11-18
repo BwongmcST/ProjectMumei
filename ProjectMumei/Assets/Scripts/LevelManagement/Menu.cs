@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using AudioManagement;
 
 namespace LevelManagement
 {
@@ -31,7 +32,6 @@ namespace LevelManagement
         }
     }
     
-
     [RequireComponent(typeof(Canvas))]
     public abstract class Menu : MonoBehaviour
     {
@@ -42,6 +42,12 @@ namespace LevelManagement
             {
                 MenuManager.instance.CloseMenu();
             }
+        }
+
+        public virtual void ClickSound()
+        {
+            AudioManager.instance.PlaySFX("ButtonClick");
+           
         }
 
     }

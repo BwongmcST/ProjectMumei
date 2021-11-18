@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using AudioManagement;
 
 
 namespace LevelManagement
@@ -26,16 +27,19 @@ namespace LevelManagement
         public void OnMasterSoundChange(float volume)
         {
             PlayerPrefs.SetFloat("MasterVolume", volume);
+            AudioManager.instance.AudioUpdate();
 
         }
         public void OnSFXVolumnPressedChange(float volume)
         {
             PlayerPrefs.SetFloat("SFXVolume", volume);
+            AudioManager.instance.AudioUpdate();
         }
 
         public void OnMusicVolumnPressedChange(float volume)
         {
             PlayerPrefs.SetFloat("MusicVolumn", volume);
+            AudioManager.instance.AudioUpdate();
         }
 
         public void LoadPreferences()

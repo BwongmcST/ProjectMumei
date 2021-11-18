@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using AudioManagement;
 
 namespace LevelManagement {
     public class MainMenu : Menu<MainMenu>
@@ -21,6 +22,7 @@ namespace LevelManagement {
             if (GameManager.instance != null)
             {
                 OnScreenLoading();
+                AudioManager.instance.StopBGM("MenuBGM");
                 GameManager.instance.LoadNexLevel();
             }
 
@@ -43,6 +45,11 @@ namespace LevelManagement {
         public override void OnBackPressed()
         {
             Application.Quit();
+        }
+
+        private void StopBGM()
+        {
+            AudioManager.instance.StopBGM("MenuBGM");
         }
     }
 
