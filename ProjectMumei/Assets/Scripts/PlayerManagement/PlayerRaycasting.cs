@@ -8,7 +8,7 @@ namespace PlayerManagement
     {
         [SerializeField] private float _pickupDistance = 7;
         public RaycastHit interactiveItemHit;
-        [SerializeField] private bool rayCastTest = false;
+        [SerializeField] private bool rayCastTest = false; //for testing only
 
         void Update()
         {
@@ -22,7 +22,7 @@ namespace PlayerManagement
             Physics.Raycast(this.transform.position, this.transform.forward, out interactiveItemHit, _pickupDistance);
             if (rayCastTest == true)
             {
-                Debug.Log(interactiveItemHit);
+               Debug.Log(interactiveItemHit);
             }
 
         }

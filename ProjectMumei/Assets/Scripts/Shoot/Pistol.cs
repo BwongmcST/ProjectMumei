@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using InventorySystem;
+using AudioManagement;
 // **This script should not enable in the object by default**
-public class Gun : MonoBehaviour
+public class Pistol : MonoBehaviour
 {
     public float damage = 10f;
     public float range = 100f;
@@ -11,6 +12,7 @@ public class Gun : MonoBehaviour
     [SerializeField] private ParticleSystem _gunflash;
     [SerializeField] private float _firerate = 5f;
     [SerializeField] private float _nextTimeToFire = 0f;
+    [SerializeField] private int _ammoSpentPerShot = 1;
 
 
     public Camera fpsCam;
@@ -32,10 +34,12 @@ public class Gun : MonoBehaviour
         {
             if (Input.GetButtonDown("Fire1") && Time.time >= _nextTimeToFire && ItemInventory.instance.bagIsOpen != true && ItemInventory.instance.activeItem.name == "Pistol")
             {
+                AudioManager.instance.PlaySFX("PistolShot");
                 _nextTimeToFire = Time.time + 1f / _firerate;
                 RaycastHit hit;
                 _gunAnimator.Play("Fire");
                 _gunflash.Play();
+                ItemInventory.instance.FireAmmo(_ammoSpentPerShot);
 
                 if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
                 {

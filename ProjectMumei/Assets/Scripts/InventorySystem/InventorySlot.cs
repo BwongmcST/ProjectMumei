@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using AudioManagement;
 
 namespace InventorySystem
 {
@@ -16,6 +17,9 @@ namespace InventorySystem
         [SerializeField] private GameObject _itemInfoPanel;
         [SerializeField] private Text _ItemNameText;
         [SerializeField] private Text _itemInfoText;
+        [SerializeField] private Text _itemAmountText;
+
+        private bool _itemIsAmmo;
 
         private void Start()
         {
@@ -23,6 +27,12 @@ namespace InventorySystem
             button = gameObject.GetComponentInChildren<Button>();
             button.interactable = false;
 
+
+        }
+
+        private void Update()
+        {
+            UpdateAmmoText();
         }
 
         public void AddItem(Item newItem)
@@ -31,20 +41,36 @@ namespace InventorySystem
             icon.sprite = _item.icon;
             icon.enabled = true;
             button.interactable = true;
+
+            if(newItem.isAmmo == true)
+            {
+                _itemAmountText.enabled = true;
+                _itemIsAmmo = true;
+            }
+            else
+            {
+                _itemIsAmmo = false;
+            }
         }
 
         public void ClearSlot()
         {
+            if (_itemIsAmmo == true)
+            {
+                _itemAmountText.enabled = false;
+            }
             _item = null;
             icon.sprite = null;
             icon.enabled = false;
             button.interactable = false;
+
         }
         public void OnMouseRightClickRemove()
         {
             if (icon.sprite != null) //Do nothing if no item in the slot
             {
                 ItemInventory.instance.RemoveItem(_item);
+                AudioManager.instance.PlaySFX("ItemDrop");
                 CloseItemPanel();
             }
         }
@@ -81,6 +107,14 @@ namespace InventorySystem
             _itemInfoPanel.SetActive(false);
             _ItemNameText.text = null;
             _itemInfoText.text = null;
+        }
+
+        private void UpdateAmmoText()
+        {
+            if(_item != null && _item.isAmmo == true)
+            {
+                _itemAmountText.text = _item.CurrentAmmoAmount.ToString();
+            }
         }
     }
 }

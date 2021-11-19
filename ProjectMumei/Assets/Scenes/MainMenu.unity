@@ -350,10 +350,43 @@ MonoBehaviour:
   - name: MenuBGM
     clip: {fileID: 8300000, guid: 2e38eebbe50801c4ea1361a7b74409df, type: 3}
     volume: 1
+    isLoop: 1
     source: {fileID: 0}
   sfxA:
   - name: ButtonClick
     clip: {fileID: 8300000, guid: 86b2a4f734c0cf146be7892ef165cc3d, type: 3}
+    volume: 1
+    source: {fileID: 0}
+  - name: PistolShot
+    clip: {fileID: 8300000, guid: 10b42b8453ceb514995449712b9ee2f0, type: 3}
+    volume: 1
+    source: {fileID: 0}
+  - name: Flashlight
+    clip: {fileID: 8300000, guid: dfdca457a82273843b273c9df33179c8, type: 3}
+    volume: 1
+    source: {fileID: 0}
+  - name: Flashlight
+    clip: {fileID: 8300000, guid: dfdca457a82273843b273c9df33179c8, type: 3}
+    volume: 1
+    source: {fileID: 0}
+  - name: ItemDrop
+    clip: {fileID: 8300000, guid: 1661042484a047a4ebba7ee4b761619b, type: 3}
+    volume: 0.2
+    source: {fileID: 0}
+  - name: DoorLocked
+    clip: {fileID: 8300000, guid: 1fee91bf8909d5740be653fc4490cfa9, type: 3}
+    volume: 1
+    source: {fileID: 0}
+  - name: DoorUnlocked
+    clip: {fileID: 8300000, guid: 69be0889c34fc7b4cac113807588e23e, type: 3}
+    volume: 1
+    source: {fileID: 0}
+  - name: DoorOpened
+    clip: {fileID: 8300000, guid: 2b8b4fd49360972429e07aff471d812a, type: 3}
+    volume: 1
+    source: {fileID: 0}
+  - name: Pickup
+    clip: {fileID: 8300000, guid: 62e343b3d74256146aa8e2c0e17de08a, type: 3}
     volume: 1
     source: {fileID: 0}
 --- !u!4 &586855053
@@ -552,6 +585,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1783951335}
+  - component: {fileID: 1783951334}
   m_Layer: 0
   m_Name: MenuAudio
   m_TagString: Untagged
@@ -559,6 +593,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1783951334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1783951333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb76c176973158b4ca2b961cf8fea81a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1783951335
 Transform:
   m_ObjectHideFlags: 0
