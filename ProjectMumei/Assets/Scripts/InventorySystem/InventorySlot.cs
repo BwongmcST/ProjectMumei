@@ -19,8 +19,6 @@ namespace InventorySystem
         [SerializeField] private Text _itemInfoText;
         [SerializeField] private Text _itemAmountText;
 
-        private bool _itemIsAmmo;
-
         private void Start()
         {
 
@@ -45,18 +43,20 @@ namespace InventorySystem
             if(newItem.isAmmo == true)
             {
                 _itemAmountText.enabled = true;
-                _itemIsAmmo = true;
+
             }
             else
             {
-                _itemIsAmmo = false;
+                _itemAmountText.enabled = false;
             }
         }
 
         public void ClearSlot()
         {
-            if (_itemIsAmmo == true)
+            if (_item != null && _item.isAmmo == true)
             {
+                Debug.Log(_item.isAmmo);
+                Debug.Log("EE");
                 _itemAmountText.enabled = false;
             }
             _item = null;
@@ -113,7 +113,7 @@ namespace InventorySystem
         {
             if(_item != null && _item.isAmmo == true)
             {
-                _itemAmountText.text = _item.CurrentAmmoAmount.ToString();
+                _itemAmountText.text = AmmoManager.instance.GetCurrentAmmo(_item).ToString();
             }
         }
     }
