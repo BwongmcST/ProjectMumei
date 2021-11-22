@@ -31,9 +31,9 @@ namespace InventorySystem
         public bool bagIsOpen;
         public GameObject dropPrefab; //new
         [SerializeField] private int _currentTotalActiveAmmo;
+        [SerializeField] private Item _currentUsingAmmo;
 
         public List<Item> items = new List<Item>();
-        public List<Item> ammo = new List<Item>();
         private static ItemInventory _instance;
         public static ItemInventory instance
         {
@@ -53,7 +53,6 @@ namespace InventorySystem
         }
         public void Add(Item item)
         {
-
             if (items.Count >= space)
             {
                 Debug.Log("Bag is full!");
@@ -61,22 +60,16 @@ namespace InventorySystem
                 return;
             }
 
-            if (item.isAmmo == true)
+            /*
+            foreach (Item i in items)
             {
-                if (AmmoManager.instance != null)
+                if (i.isAmmo == true && i.AmmoType == item.AmmoType)
                 {
-                    AmmoManager.instance.AddAmmo(item);
+                    i.CurrentAmmoAmount += item.MaxAmmoAmount;
+                    Debug.Log(i.CurrentAmmoAmount);
+                    return;
                 }
-
-                foreach (Item i in items)
-                {
-                    if (i.isAmmo == true && i.AmmoType == item.AmmoType)
-                    {
-                        return;
-                    }
-                }
-
-            }
+            }*/
 
             bagIsFull = false;
             items.Add(item);
@@ -123,7 +116,7 @@ namespace InventorySystem
                 _equipPrefab = Instantiate(activeItem.prefab, _equipmentPos);
                 Destroy(_equipPrefab.GetComponent<Rigidbody>());
                 CheckAmmo();
-                AmmoManager.instance.UseAmmo();
+                UseAmmo();
                 //_equipPrefab.GetComponentInChildren<Gun>().enabled = true;
             }
             else if (activeItem.isWeapon == true)
@@ -132,7 +125,7 @@ namespace InventorySystem
                 _equipPrefab = Instantiate(activeItem.prefab, _equipmentPos);
                 Destroy(_equipPrefab.GetComponent<Rigidbody>());
                 CheckAmmo();
-                AmmoManager.instance.UseAmmo();
+                UseAmmo();
             }
             else
             {
@@ -155,9 +148,29 @@ namespace InventorySystem
                 if (i.isAmmo == true && i.AmmoType == activeItem.weaponIndex)
                 {
                     _currentTotalActiveAmmo = _currentTotalActiveAmmo + i.CurrentAmmoAmount;
-                    //Debug.Log(_currentTotalActiveAmmo);
+                    Debug.Log(_currentTotalActiveAmmo);
                 }
             }
         }
+
+        public void UseAmmo()
+        {
+            foreach (Item i in items)
+            {
+                if (i.isAmmo == true && i.AmmoType == activeItem.weaponIndex)
+                {
+                    _currentUsingAmmo = i;
+                    Debug.Log(_currentUsingAmmo);
+                    return;
+                }
+            }
+        }
+
+        public void FireAmmo(int a)
+        {
+            _currentUsingAmmo.CurrentAmmoAmount -= a;
+        }
+
+
     }
 }

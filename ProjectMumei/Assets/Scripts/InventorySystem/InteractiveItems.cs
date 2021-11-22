@@ -7,28 +7,21 @@ namespace InventorySystem
     public class InteractiveItems : MonoBehaviour
     {
         public Item item;
-        public bool isUsed;
-
-        private void Start()
-        {
-            isUsed = false;
-        }
 
         void Pickup()
         {
+            ItemInventory.instance.Add(item);
             if(item.isAmmo == true)
             {
                 InitializeAmmo();
             }
-            ItemInventory.instance.Add(item);
         }
 
         private void InitializeAmmo()
         {
-            if (item.isused == false)
-            {
-                item.CurrentAmmoAmount = item.MaxAmmoAmount;
-            }else
+            item.CurrentAmmoAmount = item.MaxAmmoAmount;
+            Debug.Log(item.CurrentAmmoAmount);
+            if (item.isused == true)
             {
                 item.CurrentAmmoAmount = item.AmmoAmountLeft;
             }

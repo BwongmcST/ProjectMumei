@@ -14,8 +14,6 @@ public class Pistol : MonoBehaviour
     [SerializeField] private float _nextTimeToFire = 0f;
     [SerializeField] private int _ammoSpentPerShot = 1;
 
-    private bool isBulletOut;
-
 
     public Camera fpsCam;
     private void OnEnable()
@@ -28,7 +26,6 @@ public class Pistol : MonoBehaviour
     private void Update()
     {
         Shoot();
-        CheckBulletOut();
     }
 
     void Shoot()
@@ -42,15 +39,7 @@ public class Pistol : MonoBehaviour
                 RaycastHit hit;
                 _gunAnimator.Play("Fire");
                 _gunflash.Play();
-
-                if (isBulletOut != true)
-                {
-                    AmmoManager.instance.FireAmmo(_ammoSpentPerShot);
-                }
-                else
-                {
-                    Debug.Log("Bullet Out!");
-                }
+                ItemInventory.instance.FireAmmo(_ammoSpentPerShot);
 
                 if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
                 {
@@ -64,10 +53,5 @@ public class Pistol : MonoBehaviour
                 }
             }
         }
-    }
-
-    void CheckBulletOut()
-    {
-      
     }
 }
