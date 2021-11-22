@@ -11,20 +11,6 @@ namespace InventorySystem
         void Pickup()
         {
             ItemInventory.instance.Add(item);
-            if(item.isAmmo == true)
-            {
-                InitializeAmmo();
-            }
-        }
-
-        private void InitializeAmmo()
-        {
-            item.CurrentAmmoAmount = item.MaxAmmoAmount;
-            Debug.Log(item.CurrentAmmoAmount);
-            if (item.isused == true)
-            {
-                item.CurrentAmmoAmount = item.AmmoAmountLeft;
-            }
         }
     }
 }

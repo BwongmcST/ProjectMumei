@@ -118,6 +118,7 @@ namespace PlayerManagement
             else
             {
                 _playerMoveSpeed = _defaultPlayerMoveSpeed;
+                _currentStamina += _staminaRecoverSpeed * Time.deltaTime;
                 StaminaRecoever();
             }
 
