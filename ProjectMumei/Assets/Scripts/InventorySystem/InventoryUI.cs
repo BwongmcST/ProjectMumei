@@ -10,12 +10,12 @@ namespace InventorySystem
 
         InventorySlot[] slots;
 
-        private ItemInventory _itemInventory;
+        private ItemInventory _inventory;
         // Start is called before the first frame update
         void Start()
         {
-            _itemInventory = ItemInventory.instance;
-            _itemInventory.onItemChangedCallback += UpdateUI; // if onItemChangedCallback invoke, run UpdageUI();
+            _inventory = ItemInventory.instance;
+            _inventory.onItemChangedCallback += UpdateUI; // if onItemChangedCallback invoke, run UpdageUI();
 
             slots = itemsPartent.GetComponentsInChildren<InventorySlot>(); //Find all inventory slot and store in slots arrays
         }
@@ -24,9 +24,9 @@ namespace InventorySystem
         {
             for (int i = 0; i < slots.Length; i++)
             {
-                if (i < _itemInventory.items.Count)
+                if (i < _inventory.items.Count)
                 {
-                    slots[i].AddItem(_itemInventory.items[i]);
+                    slots[i].AddItem(_inventory.items[i]);
                 }
                 else
                 {
@@ -34,7 +34,6 @@ namespace InventorySystem
                 }
             }
 
-            
         }
     }
 }

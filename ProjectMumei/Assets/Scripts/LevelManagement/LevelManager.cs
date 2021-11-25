@@ -15,6 +15,7 @@ public class LevelManager : MonoBehaviour
     {    
         if(MainMenu.instance.LoadingScreen != null)
         {
+            Debug.Log("ACTIVE");
             MenuManager.instance.CloseAllMenu();
         }
         

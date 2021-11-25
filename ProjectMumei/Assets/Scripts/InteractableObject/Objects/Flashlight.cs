@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using InventorySystem;
-using AudioManagement;
 
 public class Flashlight : MonoBehaviour
 {
@@ -25,7 +24,6 @@ public class Flashlight : MonoBehaviour
         {
             if (Input.GetButtonDown("Fire1") && ItemInventory.instance != null && ItemInventory.instance.bagIsOpen != true && ItemInventory.instance.activeItem.name == "Flashlight")
             {
-                AudioManager.instance.PlaySFX("Flashlight");
                     if (_isOn == false)
                     {
                         _light.enabled = true;
