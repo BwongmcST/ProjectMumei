@@ -28,6 +28,7 @@ public class Pistol : MonoBehaviour
     private void Update()
     {
         Shoot();
+        CheckBulletOut();
     }
 
     void Shoot()
@@ -36,37 +37,37 @@ public class Pistol : MonoBehaviour
         {
             if (Input.GetButtonDown("Fire1") && Time.time >= _nextTimeToFire && ItemInventory.instance.bagIsOpen != true && ItemInventory.instance.activeItem.name == "Pistol")
             {
-                if (AmmoManager.instance.ammoIsOut != true)
-                {
-                 AudioManager.instance.PlaySFX("PistolShot");
+                AudioManager.instance.PlaySFX("PistolShot");
                 _nextTimeToFire = Time.time + 1f / _firerate;
                 RaycastHit hit;
                 _gunAnimator.Play("Fire");
                 _gunflash.Play();
-                AmmoManager.instance.FireAmmo(_ammoSpentPerShot);
 
-                    if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
-                    {
-                        Debug.Log(hit.transform.name);
-                        Target target = hit.transform.GetComponent<Target>();
-
-                        if (target != null)
-                        {
-                            target.TakeDamage(damage);
-                        }
-                    }
+                if (isBulletOut != true)
+                {
+                    AmmoManager.instance.FireAmmo(_ammoSpentPerShot);
                 }
                 else
                 {
-                    BulletOut();
+                    Debug.Log("Bullet Out!");
+                }
+
+                if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
+                {
+                    Debug.Log(hit.transform.name);
+                    Target target = hit.transform.GetComponent<Target>();
+
+                    if (target != null)
+                    {
+                        target.TakeDamage(damage);
+                    }
                 }
             }
         }
     }
 
-
-    void BulletOut()
+    void CheckBulletOut()
     {
-        AudioManager.instance.PlaySFX("BulletOut");
+      
     }
 }

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07207f25c35e7b74fb4596fe3d2b6491, type: 3}
   m_Name: Item_Ammo01
   m_EditorClassIdentifier: 
-  name: Item_Ammo_0
+  name: New Item
   icon: {fileID: 21300000, guid: 2f1eaeeaad36ee5469eff7ff158f37ba, type: 3}
   prefab: {fileID: 2034163385109691010, guid: ee4c56971ba7b484a8e7363095686cda, type: 3}
   description: This is a test item 02
@@ -20,8 +20,7 @@ MonoBehaviour:
   isWeapon: 0
   weaponIndex: 0
   isAmmo: 1
-  AmmoType: 1
-  AmmoClipSize: 12
+  AmmoType: 0
   MaxAmmoAmount: 20
   CurrentAmmoAmount: 20
   isused: 0

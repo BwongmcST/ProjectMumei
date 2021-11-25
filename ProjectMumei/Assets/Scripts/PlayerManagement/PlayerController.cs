@@ -211,7 +211,7 @@ namespace PlayerManagement
             if (stamina <= 0)
             {
                 _isoutOfStamina = true;
-                //Debug.Log(_isoutOfStamina);
+                Debug.Log(_isoutOfStamina);
                 return true;
             }
             else

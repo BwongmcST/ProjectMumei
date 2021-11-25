@@ -6,11 +6,8 @@ using InventorySystem;
 public class AmmoManager : MonoBehaviour
 {
     public List<Item> Ammo = new List<Item>();
-    public int[] ammoArray;
-    public bool ammoIsOut;
-    public int currentUsingAmmoType;
-    public bool isGunEquiped;
-    private int _ammoClip;
+    [SerializeField] private Item _currentUsingAmmo;
+    [SerializeField] private int _currentUsingAmmoAmount;
 
     private static AmmoManager _instance;
     public static AmmoManager instance
@@ -27,19 +24,9 @@ public class AmmoManager : MonoBehaviour
         else
         {
             _instance = this;
-            isGunEquiped = false;
         }
-    }
 
-
-    private void Start()
-    {
-        ammoArray = new int[] { 0, 0, 0, 0, 0 };
-    }
-
-    private void Update()
-    {
-        CheckAmmoIsOut();
+        Ammo = new List<Item>();
     }
 
     private void OnDestroy()
@@ -49,48 +36,63 @@ public class AmmoManager : MonoBehaviour
 
     public void AddAmmo(Item item)
     {
-        ammoArray[item.AmmoType] += item.MaxAmmoAmount;
+        foreach (Item i in Ammo)
+        {
+            if (i.isAmmo == true && i.AmmoType == item.AmmoType)
+            {
+                if(_currentUsingAmmo != null && _currentUsingAmmo.AmmoType == i.AmmoType)                     //Return the ammount ammoun to the ammo item
+                {
+                    i.CurrentAmmoAmount = _currentUsingAmmoAmount;
+                }
+                i.CurrentAmmoAmount += item.MaxAmmoAmount;
+                return;
+            }
+        }
+        Ammo.Add(item);
     }
 
-    public void AddAmmo(Item item, InteractiveItems interactiveItems)
+    public void AmmoDrop(Item item)
     {
-        ammoArray[item.AmmoType] += interactiveItems.leftAmount;
+    
     }
 
     public int GetCurrentAmmo(Item item)
     {
-        return ammoArray[item.AmmoType];
+        int currentAmmo = 0;
+        foreach (Item i in Ammo)
+        {
+            if (i.isAmmo == true && i.AmmoType == item.AmmoType)
+            {
+                currentAmmo = i.CurrentAmmoAmount;
+                break;
+            }
+        }
+        return (currentAmmo);
     }
 
 
-    public void UseAmmo(Item item)
+    public void UseAmmo()
     {
-        currentUsingAmmoType = item.AmmoType;
+        foreach (Item i in Ammo)
+        {
+            if (i.isAmmo == true && i.AmmoType == ItemInventory.instance.activeItem.weaponIndex)
+            {
+                _currentUsingAmmo = i;
+                Debug.Log(_currentUsingAmmo);
+                break;
+            }
+        }
     }
 
     public void FireAmmo(int a)
     {
-        Debug.Log("Ammo -1");
-        ammoArray[currentUsingAmmoType] -= a;
-        //_ammoClip -= a;
-
-    }
-
-    public void CheckAmmoIsOut()
-    {
-        if(ammoArray[currentUsingAmmoType] <= 0)
+        if (_currentUsingAmmo != null)
         {
-            ammoIsOut = true;
+            _currentUsingAmmo.CurrentAmmoAmount -= a;
+            _currentUsingAmmoAmount = _currentUsingAmmo.CurrentAmmoAmount;
         }
-        else
-        {
-            ammoIsOut = false;
-        }
+
     }
 
-   public void AmmoClipSize(int i)
-    {
-        _ammoClip = i;
-    }
 
 }

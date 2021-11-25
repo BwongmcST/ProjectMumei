@@ -17,7 +17,6 @@ public class Item : ScriptableObject
     [Header("Ammo")]
     public bool isAmmo;
     public int AmmoType;
-    public int AmmoClipSize;
     public int MaxAmmoAmount;
     public int CurrentAmmoAmount;
     public bool isused = false;

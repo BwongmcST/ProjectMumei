@@ -56,6 +56,7 @@ namespace InventorySystem
             if (_item != null && _item.isAmmo == true)
             {
                 Debug.Log(_item.isAmmo);
+                Debug.Log("EE");
                 _itemAmountText.enabled = false;
             }
             _item = null;
