@@ -16,7 +16,6 @@ namespace PlayerManagement
 
             void PickUp()
             {
-                Debug.Log("Picking up an item");
                 AudioManager.instance.PlaySFX("Pickup");
                 _playerRaycasting.interactiveItemHit.transform.SendMessage("Pickup");   //Called void ItemPickup() in hitted target (InteractiveItems)
 

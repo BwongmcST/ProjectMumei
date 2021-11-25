@@ -389,6 +389,10 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 62e343b3d74256146aa8e2c0e17de08a, type: 3}
     volume: 1
     source: {fileID: 0}
+  - name: BulletOut
+    clip: {fileID: 8300000, guid: 90cbf7c9e971e714fa635a95b3334d92, type: 3}
+    volume: 1
+    source: {fileID: 0}
 --- !u!4 &586855053
 Transform:
   m_ObjectHideFlags: 0
