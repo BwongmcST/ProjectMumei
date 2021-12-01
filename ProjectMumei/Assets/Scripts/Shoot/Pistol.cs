@@ -13,8 +13,11 @@ public class Pistol : MonoBehaviour
     [SerializeField] private float _firerate = 5f;
     [SerializeField] private float _nextTimeToFire = 0f;
     [SerializeField] private int _ammoSpentPerShot = 1;
+    
 
-    private bool isBulletOut;
+    private bool _isBulletOut;
+    private bool _isReloading = false;
+    private int AmmoClip;
 
 
     public Camera fpsCam;
@@ -27,23 +30,26 @@ public class Pistol : MonoBehaviour
     }
     private void Update()
     {
-        Shoot();
-    }
-
-    void Shoot()
-    {
         if (ItemInventory.instance.itemIsActive)
         {
-            if (Input.GetButtonDown("Fire1") && Time.time >= _nextTimeToFire && ItemInventory.instance.bagIsOpen != true && ItemInventory.instance.activeItem.name == "Pistol")
+            Shoot();
+            Reload();
+
+        }
+
+        void Shoot()
+        {
+            if (Input.GetButtonDown("Fire1") && Time.time >= _nextTimeToFire && ItemInventory.instance.bagIsOpen != true && ItemInventory.instance.activeItem.name == "Pistol" && _isReloading != true)
             {
-                if (AmmoManager.instance.ammoIsOut != true)
+                if (AmmoManager.instance.ammoClipIsOut != true)
                 {
-                 AudioManager.instance.PlaySFX("PistolShot");
-                _nextTimeToFire = Time.time + 1f / _firerate;
-                RaycastHit hit;
-                _gunAnimator.Play("Fire");
-                _gunflash.Play();
-                AmmoManager.instance.FireAmmo(_ammoSpentPerShot);
+                    Debug.Log("XXXX");
+                    AudioManager.instance.PlaySFX("PistolShot");
+                    _nextTimeToFire = Time.time + 1f / _firerate;
+                    RaycastHit hit;
+                    _gunAnimator.Play("Fire");
+                    _gunflash.Play();
+                    AmmoManager.instance.FireAmmo(_ammoSpentPerShot);
 
                     if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
                     {
@@ -63,10 +69,25 @@ public class Pistol : MonoBehaviour
             }
         }
     }
-
-
     void BulletOut()
     {
         AudioManager.instance.PlaySFX("BulletOut");
+    }
+
+    void Reload()
+    {
+        if (ItemInventory.instance.itemIsActive)
+        {
+            if (Input.GetKeyDown(KeyCode.R) && _isReloading != true)
+            {
+                _isReloading = true;
+                _gunAnimator.Play("Reload");
+            }
+
+        }
+    }
+    void ReadyToShoot()
+    {
+        _isReloading = false;
     }
 }

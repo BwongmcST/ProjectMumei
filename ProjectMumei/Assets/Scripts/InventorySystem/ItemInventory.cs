@@ -29,7 +29,6 @@ namespace InventorySystem
         public bool bagIsFull;
         public bool bagIsOpen;
         public GameObject dropPrefab; //new
-        [SerializeField] private int _currentTotalActiveAmmo;
 
         public List<Item> items = new List<Item>();
         public List<Item> ammo = new List<Item>();
@@ -71,27 +70,24 @@ namespace InventorySystem
                 return;
             }
 
-            if (item.isAmmo == true)
+            if (item.isAmmo == true)                                                    //check ammo if ammo is used (isLeft = true if ammo dropped)
             {
-                if(interactiveItems.isLeft != false) 
+                if(interactiveItems.isLeft == true)                 
                 {
-                    Debug.Log("A");
                     AmmoManager.instance.AddAmmo(item, interactiveItems);
                 }
                 else if (AmmoManager.instance != null)
                 {
-                    Debug.Log("B");
                     AmmoManager.instance.AddAmmo(item);
                 }
 
-                foreach (Item i in items)
+                foreach (Item i in items)                                               //Return here if ammo is exist in the list
                 {
                     if (i.isAmmo == true && i.AmmoType == item.AmmoType)
                     {
                         return;
                     }
                 }
-
             }
 
             bagIsFull = false;
@@ -127,14 +123,10 @@ namespace InventorySystem
 
             if (item.isAmmo == true)
             {
-                InteractiveItems interactiveItems = newObject.GetComponent<InteractiveItems>();
+                InteractiveItems interactiveItems = newObject.GetComponent<InteractiveItems>();         //Give left ammo amount to the ammo object
                 interactiveItems.isLeft = true;
                 interactiveItems.leftAmount = AmmoManager.instance.ammoArray[item.AmmoType];
-
-                if (item.AmmoType == AmmoManager.instance.currentUsingAmmoType)
-                {
-                    AmmoManager.instance.ammoArray[AmmoManager.instance.currentUsingAmmoType] = 0;
-                }
+                AmmoManager.instance.ammoArray[item.AmmoType] = 0;
             }
 
             items.Remove(item);
@@ -151,7 +143,6 @@ namespace InventorySystem
                 itemIsActive = true;
                 activeItem = item;
                 _activeIcon.sprite = activeItem.icon;
-                _currentTotalActiveAmmo = 0;
 
 
             if (activeItem.isWeapon == true && _equipPrefab == null)
@@ -159,7 +150,19 @@ namespace InventorySystem
                 _equipPrefab = Instantiate(activeItem.prefab, _equipmentPos);
                 Destroy(_equipPrefab.GetComponent<Rigidbody>());
                 AmmoManager.instance.UseAmmo(item);
-                //_equipPrefab.GetComponentInChildren<Gun>().enabled = true;
+
+                /*
+                if (AmmoManager.instance.ammoArray[item.AmmoType] >= 0)
+                {
+                    Debug.Log(AmmoManager.instance.ammoArray[item.AmmoType]);
+                    int clipsize = item.AmmoClipSize;
+                    AmmoManager.instance.AmmoClipSize(clipsize);
+                }
+                else
+                {
+                    Debug.Log("NO AMMO");
+                }*/
+
             }
             else if (activeItem.isWeapon == true)
             {
@@ -187,7 +190,9 @@ namespace InventorySystem
             {
                 if (activeItem.AmmoType == AmmoManager.instance.currentUsingAmmoType)
                 {
-                    ammoText.text = AmmoManager.instance.ammoArray[AmmoManager.instance.currentUsingAmmoType].ToString();
+                    string clipAmmo = AmmoManager.instance.currentAmmoClipCount.ToString();
+                    string totalAmmo = AmmoManager.instance.ammoArray[AmmoManager.instance.currentUsingAmmoType].ToString();
+                    ammoText.text = clipAmmo + "/"+ totalAmmo;
                 }
             }
             else

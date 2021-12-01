@@ -7,10 +7,12 @@ public class AmmoManager : MonoBehaviour
 {
     public List<Item> Ammo = new List<Item>();
     public int[] ammoArray;
-    public bool ammoIsOut;
+    public bool ammoClipIsOut;
+    public bool allAmmoOut;
+   
     public int currentUsingAmmoType;
     public bool isGunEquiped;
-    private int _ammoClip;
+    public int currentAmmoClipCount;
 
     private static AmmoManager _instance;
     public static AmmoManager instance
@@ -71,26 +73,26 @@ public class AmmoManager : MonoBehaviour
     public void FireAmmo(int a)
     {
         Debug.Log("Ammo -1");
-        ammoArray[currentUsingAmmoType] -= a;
-        //_ammoClip -= a;
+        //ammoArray[currentUsingAmmoType] -= a;
+        currentAmmoClipCount -= a; 
 
     }
 
     public void CheckAmmoIsOut()
     {
-        if(ammoArray[currentUsingAmmoType] <= 0)
+        if(currentAmmoClipCount <= 0)
         {
-            ammoIsOut = true;
-        }
-        else
+            ammoClipIsOut = true;
+        }else
         {
-            ammoIsOut = false;
+            ammoClipIsOut = false;
         }
     }
 
-   public void AmmoClipSize(int i)
+   public int AmmoClipSize(int i)                       //Get weapon ammo capacity
     {
-        _ammoClip = i;
+        currentAmmoClipCount = i;
+        return currentAmmoClipCount;
     }
 
 }

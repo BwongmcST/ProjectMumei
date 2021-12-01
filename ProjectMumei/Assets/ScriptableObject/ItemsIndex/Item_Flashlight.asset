@@ -18,7 +18,7 @@ MonoBehaviour:
   description: A normal flashlight
   scale: 2.5
   isWeapon: 1
-  weaponIndex: 2
+  weaponIndex: 100
   isAmmo: 0
   AmmoType: 0
   AmmoClipSize: 0
