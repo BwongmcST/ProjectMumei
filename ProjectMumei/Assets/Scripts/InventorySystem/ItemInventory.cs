@@ -31,7 +31,6 @@ namespace InventorySystem
         public GameObject dropPrefab; //new
 
         public List<Item> items = new List<Item>();
-        public List<Item> ammo = new List<Item>();
 
         private GameObject _pickedUpObject;  //ammo drop system test
         private static ItemInventory _instance;
@@ -129,6 +128,11 @@ namespace InventorySystem
                 AmmoManager.instance.ammoArray[item.AmmoType] = 0;
             }
 
+            if(item.isWeapon == true)
+            {
+                AmmoManager.instance.GiveAmmoBackToClip(item.AmmoType);
+            }
+
             items.Remove(item);
 
             if (onItemChangedCallback != null)
@@ -140,29 +144,20 @@ namespace InventorySystem
 
         public void ActiveItem(Item item)
         {
+            if (activeItem != null)
+            {
+                AmmoManager.instance.GiveAmmoBackToClip(activeItem.AmmoType);
+            }
                 itemIsActive = true;
                 activeItem = item;
                 _activeIcon.sprite = activeItem.icon;
-
 
             if (activeItem.isWeapon == true && _equipPrefab == null)
             {
                 _equipPrefab = Instantiate(activeItem.prefab, _equipmentPos);
                 Destroy(_equipPrefab.GetComponent<Rigidbody>());
                 AmmoManager.instance.UseAmmo(item);
-
-                /*
-                if (AmmoManager.instance.ammoArray[item.AmmoType] >= 0)
-                {
-                    Debug.Log(AmmoManager.instance.ammoArray[item.AmmoType]);
-                    int clipsize = item.AmmoClipSize;
-                    AmmoManager.instance.AmmoClipSize(clipsize);
-                }
-                else
-                {
-                    Debug.Log("NO AMMO");
-                }*/
-
+                AmmoManager.instance.AmmoClipSize(item.AmmoClipSize);
             }
             else if (activeItem.isWeapon == true)
             {
@@ -170,6 +165,7 @@ namespace InventorySystem
                 _equipPrefab = Instantiate(activeItem.prefab, _equipmentPos);
                 Destroy(_equipPrefab.GetComponent<Rigidbody>());
                 AmmoManager.instance.UseAmmo(item);
+                AmmoManager.instance.AmmoClipSize(item.AmmoClipSize);
             }
             else
             {

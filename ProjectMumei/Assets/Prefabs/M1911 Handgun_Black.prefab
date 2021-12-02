@@ -540,8 +540,8 @@ MonoBehaviour:
   _gunAnimator: {fileID: 0}
   _gunflash: {fileID: 4900535066322036549}
   _firerate: 15
-  _nextTimeToFire: 0
   _ammoSpentPerShot: 1
+  _useAmmoType: 1
   fpsCam: {fileID: 0}
 --- !u!1 &8184133812709279532
 GameObject:

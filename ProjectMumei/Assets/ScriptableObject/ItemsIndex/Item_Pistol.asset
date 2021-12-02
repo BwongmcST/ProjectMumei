@@ -15,7 +15,7 @@ MonoBehaviour:
   name: Pistol
   icon: {fileID: 21300000, guid: 5d7061fc7da05ce44add317708ec7215, type: 3}
   prefab: {fileID: 841217563800876751, guid: c2753a5e89f5d994c848bd736bdb6ae8, type: 3}
-  description: This is a test item 04, a pistol
+  description: M1911 pistol
   scale: 2.5
   isWeapon: 1
   weaponIndex: 1

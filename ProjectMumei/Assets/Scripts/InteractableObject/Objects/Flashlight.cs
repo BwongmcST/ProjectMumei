@@ -23,8 +23,9 @@ public class Flashlight : MonoBehaviour
     {
         if (ItemInventory.instance.itemIsActive)
         {
-            if (Input.GetButtonDown("Fire1") && ItemInventory.instance != null && ItemInventory.instance.bagIsOpen != true && ItemInventory.instance.activeItem.name == "Flashlight")
+            if (Input.GetButtonDown("Fire1") && ItemInventory.instance != null && ItemInventory.instance.bagIsOpen != true && ItemInventory.instance.activeItem.name == "Item_Flashlight")
             {
+            
                 AudioManager.instance.PlaySFX("Flashlight");
                     if (_isOn == false)
                     {

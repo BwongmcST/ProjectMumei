@@ -11,13 +11,12 @@ public class Pistol : MonoBehaviour
     [SerializeField] private Animator _gunAnimator;
     [SerializeField] private ParticleSystem _gunflash;
     [SerializeField] private float _firerate = 5f;
-    [SerializeField] private float _nextTimeToFire = 0f;
     [SerializeField] private int _ammoSpentPerShot = 1;
-    
+    [SerializeField] private int _useAmmoType;
 
+    private float _nextTimeToFire = 0f;
     private bool _isBulletOut;
     private bool _isReloading = false;
-    private int AmmoClip;
 
 
     public Camera fpsCam;
@@ -28,6 +27,7 @@ public class Pistol : MonoBehaviour
         if (_gunAnimator == null)
             _gunAnimator = GetComponentInChildren<Animator>();
     }
+
     private void Update()
     {
         if (ItemInventory.instance.itemIsActive)
@@ -43,7 +43,6 @@ public class Pistol : MonoBehaviour
             {
                 if (AmmoManager.instance.ammoClipIsOut != true)
                 {
-                    Debug.Log("XXXX");
                     AudioManager.instance.PlaySFX("PistolShot");
                     _nextTimeToFire = Time.time + 1f / _firerate;
                     RaycastHit hit;
@@ -80,12 +79,14 @@ public class Pistol : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.R) && _isReloading != true)
             {
+                AmmoManager.instance.AmmoReload(_useAmmoType);
                 _isReloading = true;
                 _gunAnimator.Play("Reload");
             }
 
         }
     }
+
     void ReadyToShoot()
     {
         _isReloading = false;

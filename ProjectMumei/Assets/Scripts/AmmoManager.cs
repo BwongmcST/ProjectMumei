@@ -13,6 +13,7 @@ public class AmmoManager : MonoBehaviour
     public int currentUsingAmmoType;
     public bool isGunEquiped;
     public int currentAmmoClipCount;
+    public int thisAmmoClipSize;
 
     private static AmmoManager _instance;
     public static AmmoManager instance
@@ -89,10 +90,27 @@ public class AmmoManager : MonoBehaviour
         }
     }
 
-   public int AmmoClipSize(int i)                       //Get weapon ammo capacity
+   public void AmmoClipSize(int i)                       //Get weapon ammo capacity
     {
-        currentAmmoClipCount = i;
-        return currentAmmoClipCount;
+        thisAmmoClipSize = i;
+        currentAmmoClipCount = 0;
+
+    }
+
+    public void AmmoReload(int ammoType)
+    {
+        int ActualAmmoClip = thisAmmoClipSize - 1;  // -1 to avoid extra ammo count in while loop
+        while (ammoArray[ammoType] > 0 && currentAmmoClipCount <= ActualAmmoClip)
+        {
+            ammoArray[ammoType]--;
+            currentAmmoClipCount++;
+        }
+    }
+
+    public void GiveAmmoBackToClip(int ammoType)
+    {
+        ammoArray[ammoType] += currentAmmoClipCount;
+        currentAmmoClipCount = 0;
     }
 
 }

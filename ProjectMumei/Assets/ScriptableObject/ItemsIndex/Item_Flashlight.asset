@@ -15,12 +15,12 @@ MonoBehaviour:
   name: Item_Flashlight
   icon: {fileID: 21300000, guid: 6592b916f86b19e428db6f6847c7b6dd, type: 3}
   prefab: {fileID: 6395047641100067025, guid: b2adbe4bca005de4e96360d698ef00d6, type: 3}
-  description: A normal flashlight
+  description: 'A normal flashlight '
   scale: 2.5
   isWeapon: 1
-  weaponIndex: 100
+  weaponIndex: 2
   isAmmo: 0
-  AmmoType: 0
+  AmmoType: 2
   AmmoClipSize: 0
   MaxAmmoAmount: 0
   CurrentAmmoAmount: 0
